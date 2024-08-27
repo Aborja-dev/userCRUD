@@ -6,7 +6,7 @@ export interface UserModelObject {
     phone: string;
     adress: string | null;
     avatarURL: string | null;
-    type: string;
+    roleId: number;
     active: string;
 }
 

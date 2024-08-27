@@ -1,11 +1,11 @@
-import { StubServiceComposition } from "@/server/User_managment/service/index"
+import { PrismaServiceComposition, StubServiceComposition,  } from "@/server/User_managment/service/index"
 import { CustomError } from "@/server/User_managment/service/Service"
 import { ForRegisterUserController, ForLoginUserController, ForSearchQueryUsersController, ForEditUserController, UserObject, Sesion, ControllerError } from "@/server/User_managment/types/user"
 import { Request, Response } from "express"
 
 
 import pc from "picocolors";
-export const service = StubServiceComposition
+export const service = PrismaServiceComposition
 export class Controller {
     static register = async (req: Request<{}, {}, ForRegisterUserController>, res: Response) => {
         const { email, name, password, phone, adress, avatarURL } = req.body

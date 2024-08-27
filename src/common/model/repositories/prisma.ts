@@ -3,31 +3,34 @@ import { ForRegisterUserController, UserObject } from '@/server/User_managment/t
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
-
+const roles = {
+    "ADMIN": 1,
+    "USER": 2
+}
 
 const userFromModel = (user: UserModelObject): UserObject => {
     return {
         avatarURL: user.avatarURL || "",
         email: user.email,
         id: user.id,
-        isAdmin: user.type === "ADMIN",
+        isAdmin: user.roleId === 1,
         name: user.name || "",
         password: user.password,
         phone: user.phone,
-        role: user.type as 'MODERADOR' | 'VIP' | 'SELLER' | 'CLIENT' | 'ADMIN',
+        role: Object.entries(roles).find(([, value]) => value === user.roleId)?.[0] as 'MODERADOR' | 'VIP' | 'SELLER' | 'CLIENT' | 'ADMIN',
         state: user.active as "ACTIVE" | "INACTIVE" | "SUSPENDED",
     }
 }
 
 export const insertUser = async (input: ForRegisterUserController) => {
     const { email, name, password, adress, avatarURL } = input
-    const newUser: Omit<UserModelObject, 'id'> = {
+    const newUser: Omit<UserModelObject, 'id'| 'role'> = {
         avatarURL: avatarURL || "",
         email,
         name,
         password,
         phone: "",
-        type: "CLIENT",
+        roleId: roles.USER,
         active: "ACTIVE",
         adress: adress || null
     }
@@ -38,8 +41,9 @@ export const insertUser = async (input: ForRegisterUserController) => {
     }
 }
 export const updateUser = async (id: UserObject['id'], data: Partial<UserObject>) => {
+    const {role, ...userInput} = data
     try {
-        await prisma.user.update({ where: { id }, data })
+        await prisma.user.update({ where: { id }, data: userInput })
     } catch (error) {
         throw error
     }

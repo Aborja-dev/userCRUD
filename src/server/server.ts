@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors"
 import { createUserRouter } from "@/server/User_managment/userRouter";
-import { authMiddleware } from "@/server/middleware/auth";
 
 const userRouter = createUserRouter()
 
