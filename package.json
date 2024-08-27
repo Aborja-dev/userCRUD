@@ -4,7 +4,8 @@
   "description": "Servidor backend diseñado para gestionar los usuarios de una aplicación web. El servidor ofrece funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) y maneja dos tipos de usuarios: `user` y `admin`. Además, cuenta con un sistema de autenticación y autorización que utiliza `jsonwebtoken` para validar las sesiones de los usuarios y restringir las acciones disponibles según el rol asignado.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/index.ts"
   },
   "keywords": [
     "usermanagement",
@@ -25,7 +26,12 @@
     "module-alias": "^2.2.3",
     "tsx": "^4.19.0"
   },
+  "_moduleAliases": {
+    "@": "src/"
+  },
   "dependencies": {
+    "@prisma/client": "^5.19.0",
+    "@types/jsonwebtoken": "^9.0.6",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
