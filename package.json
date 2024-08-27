@@ -1,0 +1,12 @@
+{
+  "name": "usercrud",
+  "version": "1.0.0",
+  "description": "Este proyecto es un servidor backend diseñado para gestionar los usuarios de una aplicación web. El servidor ofrece funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) y maneja dos tipos de usuarios: `user` y `admin`. Además, cuenta con un sistema de autenticación y autorización que utiliza `jsonwebtoken` para validar las sesiones de los usuarios y restringir las acciones disponibles según el rol asignado.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["usermanagement", "backendserver", "nodejs", "userauth", "CRUDoperations", "cleancode", "JWTauthentication", "APIserver"],
+  "author": "Abraham Borja",
+  "license": "ISC"
+}
