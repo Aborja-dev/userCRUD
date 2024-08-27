@@ -38,11 +38,11 @@ export class Service {
         const token = await this.authManager.signToken({
             id: user?.id as number,
             loggedAt: new Date(Date.now()),
-            role: user?.role
+            role: user?.role as 'CLIENT'
         })
         return {
             id: user?.id as number,
-            role: user?.role,
+            role: user?.role as 'CLIENT',
             name: user?.name as string,
             avatarURL: user?.avatarURL as string,
             token
