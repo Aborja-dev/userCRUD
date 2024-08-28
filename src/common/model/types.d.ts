@@ -3,7 +3,7 @@ export interface UserModelObject {
     email: string;
     name: string | null;
     password: string;
-    phone: string;
+    phone: string | null;
     adress: string | null;
     avatarURL: string | null;
     roleId: number;

@@ -1,4 +1,5 @@
 import { UserModelObject } from '@/common/model/types';
+import { UserRole } from '@/server/User_managment/types/const';
 import { ForRegisterUserController, UserObject } from '@/server/User_managment/types/user';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
@@ -6,6 +7,10 @@ const prisma = new PrismaClient()
 const roles = {
     "ADMIN": 1,
     "USER": 2
+}
+
+const transformIndexToRole = (role: number) => {
+    return Object.entries(roles).find(([, value]) => value === role)?.[0]
 }
 
 const userFromModel = (user: UserModelObject): UserObject => {
@@ -16,8 +21,8 @@ const userFromModel = (user: UserModelObject): UserObject => {
         isAdmin: user.roleId === 1,
         name: user.name || "",
         password: user.password,
-        phone: user.phone,
-        role: Object.entries(roles).find(([, value]) => value === user.roleId)?.[0] as 'MODERADOR' | 'VIP' | 'SELLER' | 'CLIENT' | 'ADMIN',
+        phone: user.phone || "",
+        role: transformIndexToRole(user.roleId) as UserRole,
         state: user.active as "ACTIVE" | "INACTIVE" | "SUSPENDED",
     }
 }

@@ -1,5 +1,5 @@
 import { TokenInfo } from "@/server/User_managment/types/user"
-import jwt from 'jsonwebtoken'
+
 
 export const verifyPassword = async (password: string) => true
 export const hashPassword = async (password: string) => 'password' + password 
