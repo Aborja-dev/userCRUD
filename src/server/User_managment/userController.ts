@@ -1,5 +1,6 @@
 import { PrismaServiceComposition, StubServiceComposition,  } from "@/server/User_managment/service/index"
 import { CustomError } from "@/server/User_managment/service/Service"
+import { UserRole } from "@/server/User_managment/types/const";
 import { ForRegisterUserController, ForLoginUserController, ForSearchQueryUsersController, ForEditUserController, UserObject, Sesion, ControllerError } from "@/server/User_managment/types/user"
 import { Request, Response } from "express"
 
@@ -57,6 +58,22 @@ export class Controller {
         service.editUserState(infoToUpdate)   
         return res.status(200).send('edit endpoint')
     }
+
+    static updateOne = async (req: Request<{ id: number }, {}, Partial<ForEditUserController>>, res: Response) => {
+        const id = +req.params.id
+        const {role, active} = req.body
+        const data = {
+            role: role as UserRole,
+            state: active
+        }
+        try {
+            service.editOneUser(id, data)
+            return res.status(200).send('updateOne endpoint')
+        } catch (error) {
+            return res.status(400).send(error)
+        }
+    }
+
     static destroy = async (req: Request<{ id: number }>, res: Response) => {
         const id = +req.params.id
         service.deleteUser(id)

@@ -56,6 +56,11 @@ export class Service {
             this.userRepository.updateUser(id, data)
         })
     }
+
+    editOneUser = async (id: number, data: Partial<UserObject>) => {
+        this.userRepository.updateUser(id, data)
+    }
+
     getUsers = async (): Promise<UserObject[]> => {
         return this.userRepository.selectAllUser()
     }
