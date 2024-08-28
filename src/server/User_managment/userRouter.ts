@@ -12,6 +12,7 @@ export const createUserRouter = () => {
     router.get('/search', Controller.search)
     router.get('/detail/:id', Controller.detail)
     router.patch('/edit', Controller.edit)
+    router.patch('/edit/:id', Controller.updateOne)
     router.delete('/:id',Controller.destroy)
     router.get('/',authMiddleware, AdminMiddleware, Controller.getAll)
     return router
