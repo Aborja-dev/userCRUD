@@ -68,16 +68,21 @@ export class Controller {
         }
         try {
             service.editOneUser(id, data)
-            return res.status(200).send('updateOne endpoint')
+            return res.status(200).json({message: 'user updated'})
         } catch (error) {
-            return res.status(400).send(error)
+            return res.status(400).json({error})
         }
     }
 
     static destroy = async (req: Request<{ id: number }>, res: Response) => {
         const id = +req.params.id
-        service.deleteUser(id)
-        return res.status(200).send('delete endpoint')
+        try {
+            await service.deleteUser(id)
+            return res.status(200).json({message: 'user deleted'})
+        }
+        catch (error) {
+            return res.status(400).json({error})
+        }
     }
     static getAll = async (req: Request, res: Response) => {
         const users = await service.getUsers()

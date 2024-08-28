@@ -48,7 +48,9 @@ export const insertUser = async (input: ForRegisterUserController) => {
 export const updateUser = async (id: UserObject['id'], data: Partial<UserObject>) => {
     const {role, ...userInput} = data
     try {
-        await prisma.user.update({ where: { id }, data: userInput })
+        await prisma.user.update({ where: { id }, data: {
+            roleId: role ? roles[role] : undefined,
+        } })
     } catch (error) {
         throw error
     }
