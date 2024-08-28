@@ -38,7 +38,30 @@ const fillUserTable = async () => {
                 active: 'ACTIVE',
                 roleId: 2,
                 phone: '123456789',
-
+            },
+            {
+                email: 'client2@example.com',
+                name: 'Abraham 3',
+                password: '1234asdf',
+                active: 'ACTIVE',
+                roleId: 2,
+                phone: '123456789',
+            },
+            {
+                email: 'client3@example.com',
+                name: 'Abraham 4',
+                password: '1234asdf',
+                active: 'ACTIVE',
+                roleId: 2,
+                phone: '123456789',
+            },
+            {
+                email: 'client4@example.com',
+                name: 'Abraham 5',
+                password: '1234asdf',
+                active: 'ACTIVE',
+                roleId: 2,
+                phone: '123456789',
             }
         ]
     })

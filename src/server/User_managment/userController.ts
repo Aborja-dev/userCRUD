@@ -12,9 +12,9 @@ export class Controller {
         const { email, name, password, phone, adress, avatarURL } = req.body
         try {
             service.registerUser({ email, name, password, phone, adress, avatarURL })
-            return res.status(201).send('register end point')
+            return res.status(201).json({ message: 'register end point' })
         } catch (error) {
-            return res.status(400).send(error)
+            return res.status(400).json({ message: 'bad request' })
         }
     }
     static login = async (req: Request<{}, {}, ForLoginUserController>, res: Response<Sesion | ControllerError>) => {
