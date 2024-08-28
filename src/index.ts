@@ -1,6 +1,9 @@
 import 'module-alias/register'
+import dotenv from 'dotenv'
+dotenv.config()
 import { App } from '@/server/server';
 import pc from 'picocolors'
+
 
 const runDevApp = async (PORT: number) => {
     const app = await App()
@@ -10,5 +13,5 @@ const runDevApp = async (PORT: number) => {
 }
 
 (async () => {
-    runDevApp(3000)
+    runDevApp(Number(process.env.PORT) || 3000)
 })()

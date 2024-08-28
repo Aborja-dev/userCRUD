@@ -8,7 +8,7 @@ const users: UserObject[] =  [
         name: '',
         password: '1234asdf',
         phone: '',
-        role: 'CLIENT',
+        role: 'USER' ,
         state: 'ACTIVE',
     }
 ]
@@ -22,7 +22,7 @@ export const insertUser = async (input: ForRegisterUserController) => {
         name,
         password,
         phone: '',
-        role: 'CLIENT',
+        role: 'USER',
         state: 'ACTIVE',
     })
 
