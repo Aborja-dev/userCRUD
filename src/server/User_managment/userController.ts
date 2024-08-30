@@ -1,4 +1,4 @@
-import { PrismaServiceComposition, StubServiceComposition,  } from "@/server/User_managment/service/index"
+import { PrismaServiceComposition,  } from "@/server/User_managment/service/index"
 import { CustomError } from "@/server/User_managment/service/Service"
 import { UserRole } from "@/server/User_managment/types/const";
 import { ForRegisterUserController, ForLoginUserController, ForSearchQueryUsersController, ForEditUserController, UserObject, Sesion, ControllerError } from "@/server/User_managment/types/user"
@@ -9,12 +9,12 @@ import pc from "picocolors";
 export const service = PrismaServiceComposition
 export class Controller {
     static register = async (req: Request<{}, {}, ForRegisterUserController>, res: Response) => {
-        const { email, name, password, phone, adress, avatarURL } = req.body
+        const { email, name, password, phone, adress } = req.body
         try {
-            service.registerUser({ email, name, password, phone, adress, avatarURL })
+            await service.registerUser({ email, name, password, phone, adress, avatarFile: req.file })
             return res.status(201).json({ message: 'register end point' })
         } catch (error) {
-            return res.status(400).json({ message: 'bad request' })
+            return res.status(400).json({ error })
         }
     }
     static login = async (req: Request<{}, {}, ForLoginUserController>, res: Response<Sesion | ControllerError>) => {

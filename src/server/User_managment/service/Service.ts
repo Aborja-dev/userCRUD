@@ -1,4 +1,5 @@
 import { validateInputData } from "@/common/helpers"
+import { imageUpload } from "@/common/images_uploader"
 import { AuthManagerType, EmailSenderType, UserRepositoryType } from "@/server/User_managment/service/index"
 import { ForRegisterUserController, Sesion, UserObject } from "@/server/User_managment/types/user"
 
@@ -24,12 +25,15 @@ export class Service {
     ) {}
     registerUser = async (input: ForRegisterUserController) => {
         validateInputData(input)
-        const hashedPassword = await this.authManager.hashPassword(input.password)
-        this.userRepository.insertUser({
-            ...input,
-            password: hashedPassword
-        })
-        this.emailSender.sendEmail(input.email)
+        if (input.avatarFile) {
+            const downloadURL = await imageUpload(input.avatarFile)
+            const hashedPassword = await this.authManager.hashPassword(input.password)
+            this.userRepository.insertUser({
+                ...input,
+                password: hashedPassword
+            })
+            this.emailSender.sendEmail(input.email)
+        }
     }
     loginUser = async ({email, password}: {email: string, password: string}): Promise<Sesion> => {
         const user = await this.userRepository.selectUser('email', email)

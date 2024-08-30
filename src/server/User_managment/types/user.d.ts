@@ -44,7 +44,7 @@ export interface ForRegisterUserController {
     password: string
     phone?: string
     adress?: string
-    avatarURL?: string
+    avatarFile?: Express.Multer.File
 }
 
 export interface ForLoginUserController {
@@ -60,4 +60,8 @@ export interface ForEditUserController {
     id: number
     role: string
     active: 'INACTIVE' | 'ACTIVE' | 'SUSPENDED'
+}
+
+export interface FileUpload {
+    avatar: File   
 }
